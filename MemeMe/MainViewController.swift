@@ -11,20 +11,17 @@ import UIKit
 class MainViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var imagePickerView: UIImageView!
-    
     @IBOutlet weak var cameraButton: UIBarButtonItem!
-    
     @IBOutlet weak var topText: UITextField!
-    
     @IBOutlet weak var bottomText: UITextField!
     
     var memes: [Meme]!
     
     let memeTextAttributes = [
-        //NSStrokeColorAttributeName : UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0),
-        //NSForegroundColorAttributeName : UIColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0),
-        NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 10)!,
-        NSStrokeWidthAttributeName : 1.0
+        NSStrokeColorAttributeName: UIColor(red: 0, green: 0, blue: 0, alpha: 1),
+        NSForegroundColorAttributeName: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
+        NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+        NSStrokeWidthAttributeName : -3
     ]
     
     @IBAction func showImages(sender: UIBarButtonItem) {
@@ -65,7 +62,12 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             topText.delegate = textDelegate
             topText.defaultTextAttributes = memeTextAttributes
             topText.hidden = false
+            topText.textAlignment = NSTextAlignment.Center
             
+            bottomText.delegate = textDelegate
+            bottomText.defaultTextAttributes = memeTextAttributes
+            bottomText.hidden = false
+            bottomText.textAlignment = NSTextAlignment.Center
         }
     }
     
@@ -112,7 +114,6 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
