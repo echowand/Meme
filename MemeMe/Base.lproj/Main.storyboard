@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0ZU-Q7-UV5">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="jon-eA-Von">
+            <objects>
+                <navigationController id="0ZU-Q7-UV5" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6dR-03-maY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="4sN-6G-nKg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HxZ-1r-85b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-415.5" y="371"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -16,32 +32,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MQx-zO-MU3">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PzY-PZ-oJR">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
-                                    <barButtonItem title="pick  " id="7TY-Sr-LfR">
-                                        <connections>
-                                            <action selector="showImages:" destination="BYZ-38-t0r" id="BN6-dp-yK7"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="hZ9-CM-d1t"/>
-                                    <barButtonItem title="camera" id="hnK-c1-Rp7">
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="fDj-eM-Of6"/>
+                                    <barButtonItem systemItem="camera" id="hnK-c1-Rp7">
                                         <connections>
                                             <action selector="showCamera:" destination="BYZ-38-t0r" id="zbv-tE-ks8"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem width="22" style="plain" systemItem="fixedSpace" id="Km6-1O-VeX"/>
+                                    <barButtonItem title="Album" id="7TY-Sr-LfR">
+                                        <connections>
+                                            <action selector="showImages:" destination="BYZ-38-t0r" id="BN6-dp-yK7"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="osM-w9-6ys"/>
                                 </items>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MQx-zO-MU3">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            </imageView>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="BOTTOM" textAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="VD3-z1-o9P">
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="VD3-z1-o9P">
                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="TOP" textAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="hLY-O2-HZL">
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="hLY-O2-HZL">
                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
@@ -68,8 +86,8 @@
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="PzY-PZ-oJR"/>
                                 <exclude reference="MQx-zO-MU3"/>
+                                <exclude reference="PzY-PZ-oJR"/>
                                 <exclude reference="VD3-z1-o9P"/>
                                 <exclude reference="hLY-O2-HZL"/>
                             </mask>
@@ -89,8 +107,8 @@
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="PzY-PZ-oJR"/>
                                 <include reference="MQx-zO-MU3"/>
+                                <include reference="PzY-PZ-oJR"/>
                                 <include reference="VD3-z1-o9P"/>
                                 <include reference="hLY-O2-HZL"/>
                             </mask>
@@ -109,6 +127,18 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="vJE-xQ-2HL">
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="Og1-xj-a60">
+                            <connections>
+                                <action selector="showActivity:" destination="BYZ-38-t0r" id="djP-2r-MUp"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Fgj-qA-b8v">
+                            <connections>
+                                <action selector="cancelActivity:" destination="BYZ-38-t0r" id="Mqr-dZ-yky"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="bottomText" destination="VD3-z1-o9P" id="bPn-s3-CaU"/>
                         <outlet property="cameraButton" destination="hnK-c1-Rp7" id="lpr-8u-Bqx"/>
@@ -118,7 +148,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="427.5" y="371"/>
+            <point key="canvasLocation" x="282" y="371"/>
         </scene>
     </scenes>
 </document>

@@ -21,7 +21,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         NSStrokeColorAttributeName: UIColor(red: 0, green: 0, blue: 0, alpha: 1),
         NSForegroundColorAttributeName: UIColor(red: 1, green: 1, blue: 1, alpha: 1),
         NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSStrokeWidthAttributeName : -3
+        NSStrokeWidthAttributeName : -5
     ]
     
     @IBAction func showImages(sender: UIBarButtonItem) {
@@ -38,6 +38,16 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
+    @IBAction func showActivity(sender: UIBarButtonItem) {
+        let image = UIImage()
+        let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        self.presentViewController(activityController, animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelActivity(sender: UIBarButtonItem) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     @IBAction func showAlert(sender: UIButton) {
         let alertController = UIAlertController()
         let okAction = UIAlertAction(title: "This is Title", style: UIAlertActionStyle.Default) { (action) -> Void in
@@ -45,12 +55,6 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         }
         alertController.addAction(okAction)
         self.presentViewController(alertController, animated: true, completion: nil)
-    }
-    
-    @IBAction func showActivity(sender: UIButton) {
-        let image = UIImage()
-        let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        self.presentViewController(activityController, animated: true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -114,6 +118,8 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        topText.text = "TOP"
+        bottomText.text = "BOTTOM"
     }
 
     override func didReceiveMemoryWarning() {
