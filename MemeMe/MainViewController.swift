@@ -28,20 +28,20 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let picController = UIImagePickerController()
         picController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         picController.delegate = self
-        self.presentViewController(picController, animated: true, completion: nil)
+        presentViewController(picController, animated: true, completion: nil)
     }
     
     @IBAction func showCamera(sender: AnyObject) {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
         imagePicker.delegate = self
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func showActivity(sender: UIBarButtonItem) {
         let image = UIImage()
         let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        self.presentViewController(activityController, animated: true, completion: nil)
+        presentViewController(activityController, animated: true, completion: nil)
     }
     
     @IBAction func cancelActivity(sender: UIBarButtonItem) {
@@ -77,6 +77,11 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     func subscribeToKeyboardNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+    }
+    
+    func unsubscribeFromKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:
+            UIKeyboardWillShowNotification, object: nil)
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -129,7 +134,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        //self.unsubscribeFromKeyboardNotifications()
+        self.unsubscribeFromKeyboardNotifications()
     }
 
 }
