@@ -15,7 +15,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var topText: UITextField!
     @IBOutlet weak var bottomText: UITextField!
     
-    var memes: [Meme]!
+    var meme: Meme!
     var currText: UITextField?
     
     let memeTextAttributes = [
@@ -43,6 +43,9 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         save()
         let image = UIImage()
         let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        activityController.completionWithItemsHandler = { activity, success, items, error in
+            
+        }
         presentViewController(activityController, animated: true, completion: nil)
     }
     
@@ -78,8 +81,11 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         //Create the meme
         let memedImage = generateMemedImage()
         let meme = Meme( topText: topText.text!, bottomText: bottomText.text!, image:imagePickerView.image!, memedImage: memedImage)
+        self.meme = meme
+        
         // Add it to the memes array in the Application Delegate
         (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+        print("-----  \(meme) " )
     }
     
     // Create a UIImage that combines the Image View and the Textfields
@@ -140,7 +146,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.subscribeToKeyboardNotifications()
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
-        memes = appDelegate.memes
+        meme = appDelegate.meme
     }
     
     override func viewDidLoad() {
