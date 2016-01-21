@@ -27,6 +27,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func showImages(sender: UIBarButtonItem) {
         let picController = UIImagePickerController()
+        picController.allowsEditing = true
         picController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         picController.delegate = self
         presentViewController(picController, animated: true, completion: nil)
@@ -65,16 +66,18 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            print("?????? \(image)")
             imagePickerView.contentMode = .ScaleAspectFit
             imagePickerView.image = image
-            dismissViewControllerAnimated(true, completion: nil)
+            
             topText.defaultTextAttributes = memeTextAttributes
             topText.hidden = false
             topText.textAlignment = NSTextAlignment.Center
-
+            
             bottomText.defaultTextAttributes = memeTextAttributes
             bottomText.hidden = false
             bottomText.textAlignment = NSTextAlignment.Center
+            dismissViewControllerAnimated(true, completion: nil)
         }
     }
     
@@ -141,6 +144,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     ///////////////// Keyboard End //////////////////////
     
     override func viewWillAppear(animated: Bool) {
+        //self.navigationController!.toolbarHidden = false;
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         subscribeToKeyboardNotifications()
         let object = UIApplication.sharedApplication().delegate
