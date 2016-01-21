@@ -27,7 +27,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func showImages(sender: UIBarButtonItem) {
         let picController = UIImagePickerController()
-        picController.allowsEditing = true
+        //picController.allowsEditing = false
         picController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         picController.delegate = self
         presentViewController(picController, animated: true, completion: nil)
@@ -66,7 +66,6 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            print("?????? \(image)")
             imagePickerView.contentMode = .ScaleAspectFit
             imagePickerView.image = image
             
