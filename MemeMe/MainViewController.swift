@@ -40,17 +40,18 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     @IBAction func showActivity(sender: UIBarButtonItem) {
-        save()
         let image = UIImage()
         let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         activityController.completionWithItemsHandler = { activity, success, items, error in
-            
+            if success == true {
+                self.save()
+            }
         }
         presentViewController(activityController, animated: true, completion: nil)
     }
     
     @IBAction func cancelActivity(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func showAlert(sender: UIButton) {
@@ -66,7 +67,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imagePickerView.contentMode = .ScaleAspectFit
             imagePickerView.image = image
-            self.dismissViewControllerAnimated(true, completion: nil)
+            dismissViewControllerAnimated(true, completion: nil)
             topText.defaultTextAttributes = memeTextAttributes
             topText.hidden = false
             topText.textAlignment = NSTextAlignment.Center
@@ -82,17 +83,15 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let memedImage = generateMemedImage()
         let meme = Meme( topText: topText.text!, bottomText: bottomText.text!, image:imagePickerView.image!, memedImage: memedImage)
         self.meme = meme
-        
         // Add it to the memes array in the Application Delegate
         (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
-        print("-----  \(meme) " )
     }
     
     // Create a UIImage that combines the Image View and the Textfields
     func generateMemedImage() -> UIImage {
         // render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.drawViewHierarchyInRect(view.frame, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return memedImage
@@ -126,12 +125,12 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     func keyboardWillShow(notification: NSNotification) {
         if bottomText == currText {
-            self.view.frame.origin.y -= getKeyboardHeight(notification)
+            view.frame.origin.y -= getKeyboardHeight(notification)
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        self.view.frame.origin.y = 0
+        view.frame.origin.y = 0
     }
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
@@ -143,7 +142,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     override func viewWillAppear(animated: Bool) {
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
-        self.subscribeToKeyboardNotifications()
+        subscribeToKeyboardNotifications()
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         meme = appDelegate.meme
@@ -163,7 +162,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.unsubscribeFromKeyboardNotifications()
+        unsubscribeFromKeyboardNotifications()
     }
     
 }
