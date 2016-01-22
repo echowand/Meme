@@ -18,6 +18,23 @@ class MemeTableViewController: UITableViewController{
         tabBarController!.tabBar.hidden = false
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print("-----------")
+        if segue.identifier == "showEditView" {
+            print("do segue...")
+            dismissViewControllerAnimated(true, completion: nil)
+            if let mainViewController = segue.destinationViewController as? MainViewController{
+                print("main view controller...")
+                mainViewController.meme = Meme( topText: "TOP", bottomText: "BOTTOM", image:UIImage(), memedImage: UIImage())
+                mainViewController.imagePickerView = UIImageView()
+                mainViewController.topText = UITextField()
+                mainViewController.bottomText = UITextField()
+                let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+                applicationDelegate.meme = Meme( topText: "TOP", bottomText: "BOTTOM", image:UIImage(), memedImage: UIImage())
+            }
+        }
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memes.count
     }
@@ -25,7 +42,7 @@ class MemeTableViewController: UITableViewController{
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableViewCell") as! MemeTableViewCell
         let meme = memes[indexPath.row]
-        cell.memeImage.image = meme.image
+        cell.memeImage.image = meme.memedImage
         cell.memeImage.contentMode = .ScaleAspectFit
         cell.topText.text = meme.topText
         cell.bottomText.text = meme.bottomText

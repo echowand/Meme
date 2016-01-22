@@ -16,7 +16,7 @@ class MemeDetailViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        imageView.image = meme.image
+        imageView.image = meme.memedImage
         imageView.contentMode = .ScaleAspectFit
         tabBarController?.tabBar.hidden = true
     }

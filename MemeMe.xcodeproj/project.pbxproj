@@ -121,9 +121,9 @@
 				80DCFB721BE4387D00CAE752 /* TextDelegate.swift */,
 				8010D21B1C518BCC000DC8F4 /* MemeTableViewController.swift */,
 				8010D2231C51BDF8000DC8F4 /* MemeTableViewCell.swift */,
+				8010D2211C519A84000DC8F4 /* MemeCollectionViewCell.swift */,
 				8010D21D1C518FDE000DC8F4 /* MemeDetailViewController.swift */,
 				8010D21F1C519A59000DC8F4 /* MemeCollectionViewController.swift */,
-				8010D2211C519A84000DC8F4 /* MemeCollectionViewCell.swift */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";

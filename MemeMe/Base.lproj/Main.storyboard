@@ -29,7 +29,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="MainViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -165,7 +165,15 @@
                             <outlet property="delegate" destination="L5J-7S-o8B" id="kXo-8j-xQQ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Sent Memes" id="izI-o7-Fij" userLabel="Sent Memes"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Sent Memes" id="Xet-JD-C8j">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="FhG-Jj-BQb">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="show" identifier="showEditView" id="TGu-SS-Agf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zEC-mv-TdT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -258,7 +266,13 @@
                             <outlet property="delegate" destination="xrc-iR-xIU" id="MyY-Gs-6c9"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Sent Memes" id="dnI-Kc-DAw"/>
+                    <navigationItem key="navigationItem" title="Sent Memes" id="dnI-Kc-DAw">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="JtU-UV-vm5">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="show" identifier="showEditView" id="Wxy-Hx-XeN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="flowLayout" destination="Hi6-mf-kD8" id="xLa-6z-Fw2"/>
                     </connections>
@@ -304,4 +318,7 @@
             <point key="canvasLocation" x="-416" y="2125"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Wxy-Hx-XeN"/>
+    </inferredMetricsTieBreakers>
 </document>

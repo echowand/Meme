@@ -15,7 +15,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var topText: UITextField!
     @IBOutlet weak var bottomText: UITextField!
     
-    var meme: Meme!
+    var meme = Meme()
     var currText: UITextField?
     
     let memeTextAttributes = [
@@ -54,7 +54,9 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     @IBAction func cancelActivity(sender: UIBarButtonItem) {
-        dismissViewControllerAnimated(true, completion: nil)
+        navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        let memeTabBarController = storyboard?.instantiateViewControllerWithIdentifier("MemeTabBarController") as! UITabBarController
+        navigationController?.presentViewController(memeTabBarController, animated: true, completion: nil)
     }
     
     @IBAction func showAlert(sender: UIButton) {
@@ -83,12 +85,16 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func save() {
-        //Create the meme
+        // Move view origin to (0,0)
+        unsubscribeFromKeyboardNotifications()
+        view.frame.origin.y = 0
+        // Create the meme
         let memedImage = generateMemedImage()
         let meme = Meme( topText: topText.text!, bottomText: bottomText.text!, image:imagePickerView.image!, memedImage: memedImage)
         self.meme = meme
         // Add it to the memes array in the Application Delegate
         (UIApplication.sharedApplication().delegate as! AppDelegate).memes.append(meme)
+        UIImageWriteToSavedPhotosAlbum(memedImage, nil, nil, nil)
     }
     
     // Create a UIImage that combines the Image View and the Textfields
@@ -145,16 +151,18 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     ///////////////// Keyboard End //////////////////////
     
     override func viewWillAppear(animated: Bool) {
-        //self.navigationController!.toolbarHidden = false;
+        super.viewWillAppear(true)
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         subscribeToKeyboardNotifications()
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as! AppDelegate
-        meme = appDelegate.meme
+        print("MainViewControoler viewWillAppear")
+        //let object = UIApplication.sharedApplication().delegate
+        //let appDelegate = object as! AppDelegate
+        //meme = appDelegate.meme
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("MainViewControoler viewDidLoad")
         topText.text = "TOP"
         bottomText.text = "BOTTOM"
         topText.delegate = self

@@ -28,6 +28,23 @@ class MemeCollectionViewController: UICollectionViewController {
         tabBarController!.tabBar.hidden = false
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print("-----------2")
+        if segue.identifier == "showEditView" {
+            print("do segue...2")
+            dismissViewControllerAnimated(true, completion: nil)
+            if let mainViewController = segue.destinationViewController as? MainViewController{
+                print("main view controller...2")
+                //mainViewController.meme = Meme( topText: "TOP", bottomText: "BOTTOM", image:UIImage(), memedImage: UIImage())
+                mainViewController.imagePickerView = UIImageView()
+                mainViewController.topText = UITextField()
+                mainViewController.bottomText = UITextField()
+                //let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+                //applicationDelegate.meme = Meme( topText: "TOP", bottomText: "BOTTOM", image:UIImage(), memedImage: UIImage())
+            }
+        }
+    }
+    
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return memes.count
     }
@@ -37,7 +54,7 @@ class MemeCollectionViewController: UICollectionViewController {
         let meme = memes[indexPath.row]
         //cell.memeImage.image = meme.image
         //cell.memeImage.contentMode = .ScaleAspectFit
-        cell.backgroundView = UIImageView (image: meme.image)
+        cell.backgroundView = UIImageView (image: meme.memedImage)
         cell.backgroundView?.contentMode = .ScaleAspectFit
         return cell
     }
