@@ -11,7 +11,22 @@ import UIKit
 
 class MemeCollectionViewController: UICollectionViewController {
 
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     let memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let space: CGFloat = 3.0
+        let dimension = (view.frame.size.width - (2*space)) / 3.0
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        flowLayout.itemSize = CGSizeMake(dimension, dimension)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController!.tabBar.hidden = false
+    }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return memes.count
@@ -20,8 +35,10 @@ class MemeCollectionViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionViewCell", forIndexPath: indexPath) as! MemeCollectionViewCell
         let meme = memes[indexPath.row]
-        cell.memeImage.image = meme.image
-        cell.memeImage.contentMode = .ScaleAspectFit
+        //cell.memeImage.image = meme.image
+        //cell.memeImage.contentMode = .ScaleAspectFit
+        cell.backgroundView = UIImageView (image: meme.image)
+        cell.backgroundView?.contentMode = .ScaleAspectFit
         return cell
     }
     
