@@ -46,6 +46,8 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         activityController.completionWithItemsHandler = { activity, success, items, error in
             if success == true {
                 self.save()
+                let tabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("MemeTabBarController")
+                self.navigationController?.presentViewController(tabBarController!, animated: true, completion: nil)
             }
         }
         presentViewController(activityController, animated: true, completion: nil)
