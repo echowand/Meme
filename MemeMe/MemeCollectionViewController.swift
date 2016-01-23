@@ -21,20 +21,19 @@ class MemeCollectionViewController: UICollectionViewController {
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSizeMake(dimension, dimension)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController!.tabBar.hidden = false
+        collectionView?.backgroundColor = UIColor.whiteColor()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("-----------2")
         if segue.identifier == "showEditView" {
-            print("do segue...2")
             dismissViewControllerAnimated(true, completion: nil)
             if let mainViewController = segue.destinationViewController as? MainViewController{
-                print("main view controller...2")
                 //mainViewController.meme = Meme( topText: "TOP", bottomText: "BOTTOM", image:UIImage(), memedImage: UIImage())
                 mainViewController.imagePickerView = UIImageView()
                 mainViewController.topText = UITextField()

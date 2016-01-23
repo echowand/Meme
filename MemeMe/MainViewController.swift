@@ -17,6 +17,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     var meme = Meme()
     var currText: UITextField?
+    var imagePicker = UIImagePickerController()
     
     let memeTextAttributes = [
         NSStrokeColorAttributeName: UIColor(red: 0, green: 0, blue: 0, alpha: 1),
@@ -26,15 +27,13 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     ]
     
     @IBAction func showImages(sender: UIBarButtonItem) {
-        let picController = UIImagePickerController()
         //picController.allowsEditing = false
-        picController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        picController.delegate = self
-        presentViewController(picController, animated: true, completion: nil)
+        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePicker.delegate = self
+        presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func showCamera(sender: AnyObject) {
-        let imagePicker = UIImagePickerController()
         imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
         imagePicker.delegate = self
         presentViewController(imagePicker, animated: true, completion: nil)
@@ -100,7 +99,11 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     // Create a UIImage that combines the Image View and the Textfields
     func generateMemedImage() -> UIImage {
         // render view to an image
-        UIGraphicsBeginImageContext(view.frame.size)
+        if UIScreen.mainScreen().respondsToSelector("scale"){
+            UIGraphicsBeginImageContextWithOptions(CGSizeMake(view.frame.size.width, view.frame.size.height),false,UIScreen.mainScreen().scale);
+        }else{
+            UIGraphicsBeginImageContext(view.frame.size);
+        }
         view.drawViewHierarchyInRect(view.frame, afterScreenUpdates: true)
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -154,7 +157,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         super.viewWillAppear(true)
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         subscribeToKeyboardNotifications()
-        print("MainViewControoler viewWillAppear")
+        //print("MainViewControoler viewWillAppear")
         //let object = UIApplication.sharedApplication().delegate
         //let appDelegate = object as! AppDelegate
         //meme = appDelegate.meme
@@ -162,7 +165,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("MainViewControoler viewDidLoad")
+        //print("MainViewControoler viewDidLoad")
         topText.text = "TOP"
         bottomText.text = "BOTTOM"
         topText.delegate = self

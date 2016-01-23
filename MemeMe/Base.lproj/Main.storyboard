@@ -192,15 +192,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2vK-ed-bvN">
-                                <rect key="frame" x="49" y="75" width="503" height="449"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gFd-5n-fQP" firstAttribute="top" secondItem="2vK-ed-bvN" secondAttribute="bottom" constant="76" id="54J-b8-Msh"/>
-                            <constraint firstItem="2vK-ed-bvN" firstAttribute="top" secondItem="XJV-xB-d04" secondAttribute="bottom" constant="55" id="d1u-wi-EI9"/>
-                            <constraint firstItem="2vK-ed-bvN" firstAttribute="leading" secondItem="0HG-XF-o3N" secondAttribute="leadingMargin" constant="29" id="ikN-8X-ExJ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2vK-ed-bvN" secondAttribute="trailing" constant="28" id="prS-BK-iIp"/>
+                            <constraint firstItem="gFd-5n-fQP" firstAttribute="top" secondItem="2vK-ed-bvN" secondAttribute="bottom" id="54J-b8-Msh"/>
+                            <constraint firstItem="2vK-ed-bvN" firstAttribute="top" secondItem="XJV-xB-d04" secondAttribute="bottom" constant="-20" id="d1u-wi-EI9"/>
+                            <constraint firstItem="2vK-ed-bvN" firstAttribute="leading" secondItem="0HG-XF-o3N" secondAttribute="leadingMargin" constant="-20" id="ikN-8X-ExJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2vK-ed-bvN" secondAttribute="trailing" constant="-20" id="prS-BK-iIp"/>
                         </constraints>
                     </view>
                     <connections>
@@ -215,7 +215,7 @@
         <scene sceneID="g8o-QN-abE">
             <objects>
                 <navigationController id="H2a-yu-5B6" userLabel="Table" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Table" id="UAO-B8-wsi"/>
+                    <tabBarItem key="tabBarItem" title="Table" image="table" id="UAO-B8-wsi"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9WR-2R-0pm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -303,7 +303,7 @@
         <scene sceneID="1io-n7-6c8">
             <objects>
                 <navigationController id="80s-JI-NBO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Collection" id="3vK-Sv-hCg"/>
+                    <tabBarItem key="tabBarItem" title="Collection" image="collection" id="3vK-Sv-hCg"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="KXL-KO-gq1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -318,6 +318,10 @@
             <point key="canvasLocation" x="-416" y="2125"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="collection" width="32" height="32"/>
+        <image name="table" width="32" height="32"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Wxy-Hx-XeN"/>
     </inferredMetricsTieBreakers>

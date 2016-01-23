@@ -16,15 +16,13 @@ class MemeTableViewController: UITableViewController{
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController!.tabBar.hidden = false
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("-----------")
         if segue.identifier == "showEditView" {
-            print("do segue...")
             dismissViewControllerAnimated(true, completion: nil)
             if let mainViewController = segue.destinationViewController as? MainViewController{
-                print("main view controller...")
                 mainViewController.meme = Meme( topText: "TOP", bottomText: "BOTTOM", image:UIImage(), memedImage: UIImage())
                 mainViewController.imagePickerView = UIImageView()
                 mainViewController.topText = UITextField()
