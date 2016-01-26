@@ -12,7 +12,6 @@ import UIKit
 class MemeCollectionViewController: UICollectionViewController {
 
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
-    let memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,38 +20,35 @@ class MemeCollectionViewController: UICollectionViewController {
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSizeMake(dimension, dimension)
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController!.tabBar.hidden = false
         collectionView?.backgroundColor = UIColor.whiteColor()
+        collectionView?.reloadData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showEditView" {
-            dismissViewControllerAnimated(true, completion: nil)
             if let mainViewController = segue.destinationViewController as? MainViewController{
-                //mainViewController.meme = Meme( topText: "TOP", bottomText: "BOTTOM", image:UIImage(), memedImage: UIImage())
+                mainViewController.meme = Meme( topText: "TOP", bottomText: "BOTTOM", image:UIImage(), memedImage: UIImage())
                 mainViewController.imagePickerView = UIImageView()
                 mainViewController.topText = UITextField()
                 mainViewController.bottomText = UITextField()
-                //let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-                //applicationDelegate.meme = Meme( topText: "TOP", bottomText: "BOTTOM", image:UIImage(), memedImage: UIImage())
+                let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+                applicationDelegate.meme = Meme( topText: "TOP", bottomText: "BOTTOM", image:UIImage(), memedImage: UIImage())
             }
         }
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return memes.count
+        return (UIApplication.sharedApplication().delegate as! AppDelegate).memes.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionViewCell", forIndexPath: indexPath) as! MemeCollectionViewCell
-        let meme = memes[indexPath.row]
-        //cell.memeImage.image = meme.image
-        //cell.memeImage.contentMode = .ScaleAspectFit
+        let meme = (UIApplication.sharedApplication().delegate as! AppDelegate).memes[indexPath.row]
         cell.backgroundView = UIImageView (image: meme.memedImage)
         cell.backgroundView?.contentMode = .ScaleAspectFit
         return cell
@@ -60,7 +56,7 @@ class MemeCollectionViewController: UICollectionViewController {
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let detailController = storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
-        detailController.meme = memes[indexPath.row]
+        detailController.meme = (UIApplication.sharedApplication().delegate as! AppDelegate).memes[indexPath.row]
         navigationController?.pushViewController(detailController, animated: true)
     }
 }

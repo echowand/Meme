@@ -11,19 +11,15 @@ import UIKit
 
 class MemeTableViewController: UITableViewController{
     
-    let memes = (UIApplication.sharedApplication().delegate as! AppDelegate).memes
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController!.tabBar.hidden = false
+        tableView.reloadData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showEditView" {
-            tabBarController!.tabBar.hidden = true
-            dismissViewControllerAnimated(true, completion: nil)
             if let mainViewController = segue.destinationViewController as? MainViewController{
-                navigationController?.setToolbarHidden(false, animated: true)
                 mainViewController.meme = Meme( topText: "TOP", bottomText: "BOTTOM", image:UIImage(), memedImage: UIImage())
                 mainViewController.imagePickerView = UIImageView()
                 mainViewController.topText = UITextField()
@@ -35,24 +31,22 @@ class MemeTableViewController: UITableViewController{
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return memes.count
+        return (UIApplication.sharedApplication().delegate as! AppDelegate).memes.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableViewCell") as! MemeTableViewCell
-        let meme = memes[indexPath.row]
+        let meme = (UIApplication.sharedApplication().delegate as! AppDelegate).memes[indexPath.row]
         cell.memeImage.image = meme.memedImage
         cell.memeImage.contentMode = .ScaleAspectFit
         cell.topText.text = meme.topText
         cell.bottomText.text = meme.bottomText
-        //cell.imageView?.image = meme.image
-        //cell.textLabel?.text = meme.topText + meme.bottomText
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailController = storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
-        detailController.meme = memes[indexPath.row]
+        detailController.meme = (UIApplication.sharedApplication().delegate as! AppDelegate).memes[indexPath.row]
         navigationController?.pushViewController(detailController, animated: true)
     }
     

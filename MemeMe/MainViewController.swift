@@ -27,7 +27,6 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     ]
     
     @IBAction func showImages(sender: UIBarButtonItem) {
-        //picController.allowsEditing = false
         imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         imagePicker.delegate = self
         presentViewController(imagePicker, animated: true, completion: nil)
@@ -43,10 +42,9 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let image = UIImage()
         let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         activityController.completionWithItemsHandler = { activity, success, items, error in
-            if success == true {
+            if success {
                 self.save()
-                let tabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("MemeTabBarController")
-                self.navigationController?.presentViewController(tabBarController!, animated: true, completion: nil)
+                self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
             }
         }
         presentViewController(activityController, animated: true, completion: nil)
@@ -54,8 +52,6 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBAction func cancelActivity(sender: UIBarButtonItem) {
         navigationController?.dismissViewControllerAnimated(true, completion: nil)
-        let memeTabBarController = storyboard?.instantiateViewControllerWithIdentifier("MemeTabBarController") as! UITabBarController
-        navigationController?.presentViewController(memeTabBarController, animated: true, completion: nil)
     }
     
     @IBAction func showAlert(sender: UIButton) {
@@ -157,15 +153,11 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         super.viewWillAppear(true)
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         subscribeToKeyboardNotifications()
-        //print("MainViewControoler viewWillAppear")
-        //let object = UIApplication.sharedApplication().delegate
-        //let appDelegate = object as! AppDelegate
-        //meme = appDelegate.meme
+        navigationController?.setToolbarHidden(false, animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print("MainViewControoler viewDidLoad")
         topText.text = "TOP"
         bottomText.text = "BOTTOM"
         topText.delegate = self
